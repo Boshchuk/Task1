@@ -11,6 +11,7 @@ public:
 	void Print() const;
 
 private:
+	int id;                // идентификатор
 	std::string author;    // автор
 	std::string title;     // название
 	int code;              // код книги
