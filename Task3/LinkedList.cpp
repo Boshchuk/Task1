@@ -38,7 +38,7 @@ void LinkedList<T>::print() const {
 	struct Node* temp = this->first;
 
 	while (temp != nullptr) {
-		std::cout << temp->data << std::endl;
+		std::cout << temp->data.print() << std::endl;
 		temp->temp->next;
 	}
 }
@@ -106,9 +106,23 @@ void LinkedList<T>::append(const T& item) {
 }
 
 template<class T>
+Node<T>* LinkedList<T>::insert(const T& item, Node<T>* curr)
+{
+	auto afterCurrent = this->find(curr)->next;
+
+	Node<T> newNode = new Node<T>{};
+	newNode->data = item;
+
+	newNode->next = afterCurrent;
+
+	curr->next = newNode;
+
+}
+
+template<class T>
 Node<T>* LinkedList<T>::find(const T& item)
 {
-	struct Node* temp = this->first;
+	Node* temp = this->first;
 	
 	auto i = 0;
 	auto c = this->count;
@@ -133,4 +147,16 @@ Node<T>* LinkedList<T>::beg() {
 template <class T>
 Node<T>* LinkedList<T>::end() {
 	return this->last;
+}
+
+template<class T>
+void LinkedList<T>::deleteItem(const T& item)
+{
+	/*Node* q;
+
+	q = this->find(item)->next;
+
+	p->next = q->next;
+
+	delete q;*/
 }
