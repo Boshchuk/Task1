@@ -1,13 +1,25 @@
 #include "Book.h"
+#include <iostream>
 
-Book::Book()
+book::book()
 {
-	this->author = nullptr;
-	this->title = nullptr;
-	this->pageCount = 0;
-	this->code = 0;
+	this->author_     = "";
+	this->title_      = "";
+	this->page_count_ = 0;
+	this->code_       = 0;
+	this->id_         = 0;
 }
 
-void Book::Print() const
+// Конструктор инициализирующий поля значениями параметров
+book::book(std::string author,
+	std::string title,
+	int code,
+	int page_count)
+	: id_(0), author_(std::move(author)), title_(std::move(title)), code_(code), page_count_(page_count)
 {
+}
+
+void book::print() const
+{
+	std::cout << "Автор: " << author_ << ", Название: " << std::endl;
 }

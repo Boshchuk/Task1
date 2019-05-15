@@ -1,20 +1,23 @@
 #pragma once
 #include <string>
 
-class Book
+class book
 {
 public:
-	Book();
-	//~Book();
+	book();
+	book(std::string author,
+		std::string title,
+		int code,
+		int page_count);
 
 	// вывод в консоль информации о книге
-	void Print() const;
+	void print() const;
 
 private:
-	int id;                // идентификатор
-	std::string author;    // автор
-	std::string title;     // название
-	int code;              // код книги
-	int pageCount;         // количество страниц
+	int id_;                 // идентификатор
+	std::string author_;     // автор
+	std::string title_;      // название
+	int code_;               // код книги
+	int page_count_;         // количество страниц
 };
 

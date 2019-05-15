@@ -2,21 +2,18 @@
 
 // шаблонная структура представляющая узел
 template <class _Type>
-struct Node {
+struct node {
 
 	_Type data;        // данные узла
 
-	Node<_Type>* next; // указатель на слудующий узел
+	node<_Type>* next; // указатель на слудующий узел
 
 
-	~Node();
-	/*{
-		delete next
-	}*/
+	~node();
 };
 
 template<class _Type>
-inline Node<_Type>::~Node()
+node<_Type>::~node()
 {
 	delete next;
 }
