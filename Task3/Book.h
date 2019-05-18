@@ -5,16 +5,21 @@ class book
 {
 public:
 	book();
-	book(std::string author,
+	book(
+		std::string author,
 		std::string title,
 		int code,
 		int page_count);
 
 	// вывод в консоль информации о книге
 	void print() const;
+	void input_data();
+
+	bool operator ==(const book& other) const;
+
+	
 
 private:
-	int id_;                 // идентификатор
 	std::string author_;     // автор
 	std::string title_;      // название
 	int code_;               // код книги

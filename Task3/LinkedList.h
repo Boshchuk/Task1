@@ -36,16 +36,34 @@ public:
 	//LinkedList(const LinkedList<T>& otherList);
 
 	// Вовзращает true, если список не пуст и false в противном случае
-	bool is_empty() const;
+	bool is_empty() const
+	{
+		if (count_ == 0 &&
+			first_ == nullptr &&
+			last_ == nullptr)
+		{
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 
 	// Выводит данные списка
 	void print() const
 	{
-		auto temp = this->first_;
+		if (this->is_empty())
+		{
+			std::cout<< "Cписок пуст" << std::endl;
+		}
+		else
+		{
+			auto temp = this->first_;
 
-		while (temp != nullptr) {
-			temp->data.print();
-			temp = temp->next;
+			while (temp != nullptr) {
+				temp->data.print();
+				temp = temp->next;
+			}
 		}
 	}
 
@@ -57,7 +75,23 @@ public:
 	//	first = nullprt,
 	//	last = nullptr,
 	//	count = 0;
-	void clear();
+	void clear()
+	{
+		node<T> * ptr = this->first_;
+		node<T> tmptr;
+
+		this->count_ = 0;
+
+		while (ptr != nullptr) {
+			tmptr = *ptr;
+			ptr = ptr->next;
+		}
+
+		first_ = nullptr;
+		last_ = nullptr;
+
+		delete ptr;
+	}
 
 	// Возвращает данные первого элеметна списка
 	T front() const;
@@ -66,7 +100,28 @@ public:
 	T end() const;
 
 	// Добавляет элемент в начало списка.
-	void prepend(const T& item);
+	void prepend(const T& item)
+	{
+		auto new_node = new node<T>{};
+
+		new_node->data = item;
+		new_node->next = first_;
+
+		if (this->is_empty())
+		{
+			first_ = new_node;
+			last_ = new_node;
+		}
+		else
+		{
+			auto temp = this->first_;
+
+			this->first_ = new_node;
+			this->first_->next = temp;
+		}
+
+		++this->count_;
+	}
 
 	// Добавляет элемент в конец списка.
 	void append(const T& item)
@@ -76,7 +131,7 @@ public:
 		new_node->data = item;
 		new_node->next = nullptr;
 
-		if (this->first_ == nullptr)
+		if (this->is_empty())
 		{
 			first_ = new_node;
 			last_  = new_node;
@@ -91,10 +146,48 @@ public:
 	}
 
 	// Добавляет элемент item после элемента current и возвращает указатель на него.
-	node<T>* insert(const T& item, node<T>* current);
+	node<T>* insert(const T& item, node<T>* current)
+	{
+		auto new_node = new node<T>{};
+		new_node->data = item;
+		new_node->next = nullptr;
+
+		if (this->is_empty())
+		{
+			first_ = new_node;
+			last_ = new_node;
+		}
+		else
+		{
+			auto after_current = this->find(current->data)->next;
+
+			new_node->next = after_current;
+
+			current->next = new_node;
+		}
+		return new_node;
+	}
 
 	// Ищет в списке элемент item и возвращает указатель на этот элемент.
-	node<T>* find(const T& item);
+	node<T>* find(const T& item)
+	{
+		auto temp = this->first_;
+
+		auto i = 0;
+		auto c = this->count_;
+
+		while (i < c) {
+
+			if (temp->data == item) {
+				return temp;
+			}
+
+			temp = temp->next;
+			i++;
+		}
+
+		return nullptr;
+	}
 
 	// Возвращает указатель на первый элемент списка.
 	node<T>* beg();
