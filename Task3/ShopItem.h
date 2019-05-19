@@ -1,18 +1,27 @@
 #pragma once
 #include <string>
 
-class ShopItem
+class shop_item
 {
 public:
-	ShopItem();
-	~ShopItem();
+	shop_item();
+	shop_item(
+		std::string title,       // наименование
+		std::string description, // описание 
+		int item_code,			  // код товара
+		int quantity			  // количество
+	);
 
+	// вывод в консоль информации о книге
+	void print() const;
+	void input_data();
+
+	bool operator ==(const shop_item& other) const;
 
 private:
-	int id;                // идентификатор
-	std::string title;
-	std::string description;
-	int itemCode;
-	int quantity;
+	std::string title_;       // наименование
+	std::string description_; // описание 
+	int item_code_;			  // код товара
+	int quantity_;			  // количество
 };
 

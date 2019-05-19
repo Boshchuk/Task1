@@ -17,8 +17,6 @@ public:
 
 	bool operator ==(const book& other) const;
 
-	
-
 private:
 	std::string author_;     // автор
 	std::string title_;      // название

@@ -8,7 +8,6 @@ struct node {
 
 	node<_Type>* next; // указатель на слудующий узел
 
-
 	~node();
 };
 

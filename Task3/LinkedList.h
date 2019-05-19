@@ -29,12 +29,6 @@ public:
 		this->clear();
 	}
 
-	// Перегрузка оператора присваивая.
-	//const LinkedList<T>& operator = (const LinkedList<T>&);
-
-	// Копирующий конструткор
-	//LinkedList(const LinkedList<T>& otherList);
-
 	// Вовзращает true, если список не пуст и false в противном случае
 	bool is_empty() const
 	{
@@ -78,13 +72,15 @@ public:
 	void clear()
 	{
 		node<T> * ptr = this->first_;
-		node<T> tmptr;
+		node<T>* tmptr;
 
 		this->count_ = 0;
 
 		while (ptr != nullptr) {
-			tmptr = *ptr;
+			tmptr = ptr;
 			ptr = ptr->next;
+
+			delete tmptr;
 		}
 
 		first_ = nullptr;
@@ -169,6 +165,7 @@ public:
 	}
 
 	// Ищет в списке элемент item и возвращает указатель на этот элемент.
+	// возвращает nullptr если элемент не найден
 	node<T>* find(const T& item)
 	{
 		auto temp = this->first_;
@@ -196,7 +193,29 @@ public:
 	node<T>* end();
 
 	// Удаляет элемент item из списка.
-	void delete_item(const T &item);
+	void delete_item(const T &item)
+	{
+		node<T>* q;
+		node<T>* temp = this->first_;
+
+		auto i = 0;
+		auto c = this->count_;
+		while (i < c) {
+
+			if (temp->next->data == item) {
+				q = temp->next;
+
+				temp->next = q->next;
+
+				delete q;
+
+				break;
+			}
+
+			temp = temp->next;
+			i++;
+		}
+	}
 
 private:
 

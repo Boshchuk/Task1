@@ -14,7 +14,10 @@ book::book(std::string author,
 	std::string title,
 	int code,
 	int page_count)
-	: author_(std::move(author)), title_(std::move(title)), code_(code), page_count_(page_count)
+	: author_(std::move(author)),
+		title_(std::move(title)),
+		code_(code),
+		page_count_(page_count)
 {
 }
 
